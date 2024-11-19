@@ -81,6 +81,7 @@ tree = DecisionTreeClassifier(max_depth=5)
 rforest = RandomForestClassifier(n_estimators=200, random_state=1)
 rforest.fit(xtrain,ytrain)
 importance = rforest.feature_importances_
+print(pd.DataFrame({'Importance':importance}, index=xtest.columns).sort_values(by='Importance', ascending=False),'\n')
 
 
 #Results
