@@ -30,8 +30,9 @@ for column in ['employment_duration','job','other_credit','credit_history','chec
 #Data preparation
 variables = ['checking_balance', 'months_loan_duration', 'credit_history', 'purpose', 'amount', 'savings_balance',
               'employment_duration', 'age', 'housing', 'existing_loans_count', 'job', 'default']
-data_enc = data.loc[data['checking_balance']!='unknown', variables]
+data_enc = data.loc[:, variables]
 data_enc.loc[data_enc['purpose']=='car0','purpose'] = 'car'
+data_enc['checking_balance'] = data_enc['checking_balance'].replace('unknown', data_enc['checking_balance'].value_counts().index[1])
 data_enc['savings_balance'] = data_enc['savings_balance'].replace('unknown', data_enc['savings_balance'].mode()[0])
 print(f'Nº rows now: {data_enc.shape[0]}','\n')
 Le = LabelEncoder()
