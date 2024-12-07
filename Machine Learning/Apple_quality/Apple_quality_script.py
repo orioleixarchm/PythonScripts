@@ -53,7 +53,7 @@ data.iloc[:,:-1] = Sc.fit_transform(data.iloc[:,:-1])
 #Data Split
 Y = data['Quality']
 X = data.drop(columns='Quality')
-xtest, xtrain, ytest, ytrain = train_test_split(X, Y, test_size=0.2, random_state=1)
+xtrain, xtest, ytrain, ytest = train_test_split(X, Y, test_size=0.2, random_state=1)
 
 #Logistic
 logit = LogisticRegression()
