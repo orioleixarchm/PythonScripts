@@ -128,7 +128,7 @@ ax5.set_title('Predicted vs Actual Rolling Volatility')
 ax5.legend()
 
 ax6.plot(y_test.index, rolling_preds, label='Predicted Rolling Volatility', color='orange')
-ax6.plot(y_test.index, y_test.rolling(window=40).std(), label='Actual Rolling Volatility', color='blue')
+ax6.plot(y_test.index, y_test.rolling(window=5).std(), label='Actual Rolling Volatility', color='blue')
 ax6.set_title('Predicted vs Actual Absolute Rolling Volatility')
 ax6.legend()
 
