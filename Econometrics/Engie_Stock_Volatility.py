@@ -123,7 +123,7 @@ ax4.legend(['True Daily Returns', 'Predicted Rolling Returns'])
 
 fig, (ax5, ax6, ax7) = plt.subplots(3, 1, figsize=(10, 8))
 ax5.plot(y_test.index, rolling_preds, label='Predicted Rolling Volatility', color='orange')
-ax5.plot(y_test.index, df['Return'].iloc[-y_test.shape[0]:].rolling(window=40).std(), label='Actual Rolling Volatility', color='blue')
+ax5.plot(y_test.index, df['Return'].iloc[-y_test.shape[0]:].rolling(window=5).std(), label='Actual Rolling Volatility', color='blue')
 ax5.set_title('Predicted vs Actual Rolling Volatility')
 ax5.legend()
 
