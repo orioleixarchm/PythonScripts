@@ -275,9 +275,6 @@ for serie, nombre in zip([gdp, unemployment, interest, inflation, inflation_pct]
     arima_model = ARIMA(train,order=(AR,I,MA))
     fitted_arima = arima_model.fit()
     arima_forecast = fitted_arima.predict(start=len(train), end=len(train)+len(test)-1)
-    exp_smooth_model = ES(train, trend='additive', seasonal='additive', seasonal_periods=S)
-    fitted_es = exp_smooth_model.fit()
-    es_forecast = fitted_es.forecast(steps=len(test))
 
     fig6, axes7 = plt.subplots(3,1)
     fig6.tight_layout(pad=2)
