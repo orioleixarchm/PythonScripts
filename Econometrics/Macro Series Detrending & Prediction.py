@@ -269,7 +269,6 @@ for serie, nombre in zip([gdp, unemployment, interest, inflation, inflation_pct]
     AR = parameters_map[nombre][0]
     I = parameters_map[nombre][1]
     MA = parameters_map[nombre][2]
-    S = parameters_map[nombre][3]
     train = serie[:round(len(serie)*0.75)] if nombre == 'GDP' else serie[:round(len(serie)*0.8)]
     test = serie[-round(len(serie)*0.25):] if nombre == 'GDP' else serie[-round(len(serie)*0.2):] 
     arima_model = ARIMA(train,order=(AR,I,MA))
