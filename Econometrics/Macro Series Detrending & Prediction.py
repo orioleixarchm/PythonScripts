@@ -265,7 +265,7 @@ for serie, nombre in zip([gdp, unemployment, interest, inflation, inflation_pct]
     print('\n')
 
 for serie, nombre in zip([gdp, unemployment, interest, inflation, inflation_pct], ['GDP', 'Unemployment', 'Interest Rates', 'Inflation', 'Year Change in Inflation']):
-    parameters_map = {'GDP':[5,2,2,4], 'Unemployment':[2,0,10,12], 'Interest Rates':[3,0,10,30], 'Inflation':[9,2,3,12], 'Year Change in Inflation':[4,0,10,12]}
+    parameters_map = {'GDP':[5,2,2], 'Unemployment':[2,0,10], 'Interest Rates':[3,0,10], 'Inflation':[9,2,3], 'Year Change in Inflation':[4,0,10]}
     AR = parameters_map[nombre][0]
     I = parameters_map[nombre][1]
     MA = parameters_map[nombre][2]
@@ -291,20 +291,4 @@ for serie, nombre in zip([gdp, unemployment, interest, inflation, inflation_pct]
     axes7[2].plot(arima_forecast, color='red', label='Forecast data')
     axes7[2].set_title(f'Test and ARIMA forecasted data for serie {nombre}')
     axes7[2].legend()
-
-    fig7, axes8 = plt.subplots(3,1)
-    fig7.tight_layout(pad=2)
-    axes8[0].plot(train, color='blue', label='Train data')
-    axes8[0].plot(test, color='orange', label='Test data')
-    axes8[0].plot(es_forecast, color='red', label='Forecast data')
-    axes8[0].set_title(f'Train, test and Exp. Smoothing forecasted data for serie {nombre}')
-    axes8[0].legend()
-    axes8[1].plot(add_decomposition(serie)[0],color='green', label='trend')
-    axes8[1].plot(es_forecast, color='red', label='Forecast data')
-    axes8[1].set_title(f'Trend and Exp. Smoothing forecasted data for serie {nombre}')
-    axes8[1].legend()
-    axes8[2].plot(test, color='orange', label='Test data')
-    axes8[2].plot(es_forecast, color='red', label='Forecast data')
-    axes8[2].set_title(f'Test and Exp. Smoothing forecasted data for serie {nombre}')
-    axes8[2].legend()
     plt.show()
