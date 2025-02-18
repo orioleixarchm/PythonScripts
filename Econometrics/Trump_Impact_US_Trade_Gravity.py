@@ -44,7 +44,7 @@ def trade_flows(reporter, partner, year_list, flow="X"):
             )[['refYear', 'reporterCode', 'partnerCode', 'primaryValue']]
             data = pd.concat([data,data_1])
         df[code_name_map[id]] = data
-        print(code_name_map[id])
+        print(code_name_map[id], flow)
         print(df[code_name_map[id]].head(),'\n')
     return df
 
@@ -64,20 +64,12 @@ def data_enrichment(country, flow="X"):
         df = DFX[country].set_index('refYear')
         df['reporterCode'] = df['reporterCode'].astype('str').map(code_name_map)
         df['partnerCode'] = df['partnerCode'].astype('str').map(code_name_map)
-        print("Mappings")
-        print(df.head())
         df = df.join(Crisis, how='left')
-        print("Crisis")
-        print(df.head())
         df = df.merge(trade_data.loc[trade_data['country']=="United States",['date','GDP']], 
                                     left_index=True, right_on='date').rename(columns={'GDP':'Exporter_GDP','reporterCode':'Exporter',
                                     'partnerCode':'Importer','primaryValue':'Trade_flow'}).set_index('date')
-        print("First merge")
-        print(df.head())
         df = df.merge(trade_data.loc[trade_data['country']==country,['date','GDP']], 
                                 left_index=True, right_on='date').rename(columns={'GDP':'Importer_GDP'}).set_index('date')
-        print("Second merge")
-        print(df.head())
     else:
         df = DFM[country].set_index('refYear')
         df['reporterCode'] = df['reporterCode'].astype('str').map(code_name_map)
