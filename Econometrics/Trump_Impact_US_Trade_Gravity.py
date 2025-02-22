@@ -1,6 +1,7 @@
 #Importing packages
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 import statsmodels.api as sm
 import statsmodels.formula.api as smf
 import comtradeapicall
@@ -103,6 +104,39 @@ data_all = pd.concat([US_China_X.reset_index(drop=False),US_Japan_X.reset_index(
                       US_Brazil_X.reset_index(drop=False), US_China_M.reset_index(drop=False), US_Japan_M.reset_index(drop=False),
                       US_Germany_M.reset_index(drop=False),US_Mexico_M.reset_index(drop=False), US_Canada_M.reset_index(drop=False),
                       US_Italy_M.reset_index(drop=False),US_Brazil_M.reset_index(drop=False)], axis=0)
+
+#Visualization
+data_vis = data_all.copy()
+data_vis['Trade_flow'] = data_vis['Trade_flow'].div(1000000000)
+data_vis = {'X':data_vis.loc[data_vis['Exporter']=='USA',:].pivot(index='date', columns='Importer', values='Trade_flow'),
+            'M':data_vis.loc[data_vis['Importer']=='USA',:].pivot(index='date', columns='Exporter', values='Trade_flow')}
+fig, axes = plt.subplots(2,1)
+fig.tight_layout(pad=2.0)
+axes[0].plot(data_vis['X'])
+axes[0].set_title('Exports from USA')
+axes[0].set_ylabel('USD Billions')
+axes[0].set_xticks(range(2000,2025))
+axes[0].set_xticklabels(['2000','2001','2002','2003','2004','2005','2006','2007','2008','2009','2010','2011',
+                   '2012','2013','2014','2015','2016','2017','2018','2019','2020','2021','2022','2023','2024'])
+axes[0].legend(data_vis['X'].columns)
+
+axes[1].plot(data_vis['M'])
+axes[1].set_title('Imports from USA')
+axes[1].set_ylabel('USD Billions')
+axes[1].set_xticks(range(2000,2025))
+axes[1].set_xticklabels(['2000','2001','2002','2003','2004','2005','2006','2007','2008','2009','2010','2011',
+                   '2012','2013','2014','2015','2016','2017','2018','2019','2020','2021','2022','2023','2024'])
+axes[1].legend(data_vis['M'].columns)
+
+for date_C in Crisis.index[Crisis==1]:
+    axes[0].axvline(x=date_C, color='gray', alpha=0.8, label='Crisis', linestyle='--')
+    axes[1].axvline(x=date_C, color='gray', alpha=0.8, label='Crisis', linestyle='--')
+
+for date_T in [2018,2019,2020,2021]:
+    axes[0].axvline(x=date_T, color='red', alpha=0.5, label='Trump')
+    axes[1].axvline(x=date_T, color='red', alpha=0.5, label='Trump')
+
+plt.show()
 
 #Dummies for Fixed effects creation
 data_all['Trump'] = np.where((data_all['date']>=2018) & (data_all['date']<=2021),1,0)
