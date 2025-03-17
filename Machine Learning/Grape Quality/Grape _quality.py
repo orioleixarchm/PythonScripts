@@ -88,7 +88,7 @@ print(pd.DataFrame({'Variables':xtest.columns,
 
 modelsr = {}
 for model, nmodel in zip([ols, lasso, treer, rfr],['OLS', 'Lasso', 'Regression Tree', 'Regression Random Forest']):
-    model.fit(xtest,ytest)
+    model.fit(xtrain,ytrain)
     y_pred = model.predict(xtest)
     mse = mean_squared_error(ytest, y_pred)
     r2 = r2_score(ytest, y_pred)
