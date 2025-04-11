@@ -3,6 +3,8 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+import xgboost as xgb
+from xgboost import XGBClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
@@ -57,9 +59,12 @@ rf.fit(xtrain, ytrain)
 importance = rf.feature_importances_
 print(pd.DataFrame({'Importance': importance}, index=xtrain.columns).sort_values(by='Importance', ascending=False).head())
 
+#Extreme Gradient Boost
+xgb_model = XGBClassifier(use_label_encoder=False, eval_metric='logloss')
+
 #Metrics and models
 models = {}
-for model, name in zip([logit, tree, rf], ['Logistic', 'Decision Tree', 'random Forest']):
+for model, name in zip([logit, tree, rf, xgb_model], ['Logistic', 'Decision Tree', 'random Forest', 'Extreme Gradient Boost']):
     model.fit(xtrain, ytrain)
     ypred = model.predict(xtest)
     acc = accuracy_score(ytest, ypred)
