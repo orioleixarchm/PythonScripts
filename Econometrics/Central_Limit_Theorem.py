@@ -44,7 +44,7 @@ for i in range(iterations):
             axes_I[axes].set_ylabel('Frequency')
             axes_I[axes].set_xlabel('Values')
 
-distribution_means = {k: pd.Series(lista) for k, lista in distribution_means.items()} #Optional to transform lists into Series
+distribution_means = {Name: pd.Series(Lista) for Name, Lista in distribution_means.items()} #Optional to transform lists into Series
     
 fig_II, axes_II = plt.subplots(2,4)
 fig_II.tight_layout(pad=3)
