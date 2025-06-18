@@ -79,6 +79,7 @@ axis_IV[3].set_title('Bottom 5 Industries with lower Benefits score')
 axis_IV[3].set_xlabel('Industry')
 axis_IV[3].set_ylabel('Average Benefits score')
 
+#Salaries, Education Level and Experience
 fig_V, axis_V = plt.subplots(2,3, figsize=(8, 8))
 fig_V.tight_layout(pad=2)
 axis_V = axis_V.flatten()
@@ -138,6 +139,7 @@ plt.xlabel('Industry')
 plt.xticks(rotation=30)
 plt.ylabel('Education Level')
 
+#Posting frequency
 data['posting_date'] = pd.to_datetime(data['posting_date'])
 data_day_trend = data.groupby('posting_date').size().sort_index()
 data_month_trend = data.groupby(data['posting_date'].dt.to_period('M')).size()
