@@ -13,13 +13,13 @@ Budget = 100000
 
 #Weibul Distribution
 T = np.random.weibull(a=Size_K,size=Sample_Size)*Lambda
-lognormal_costs = np.random.lognormal(mean=10.9, sigma=0.8,size=Sample_Size)
+lognormal_costs = np.random.lognormal(mean=11, sigma=0.8,size=Sample_Size)
 fig_I, axes_I = plt.subplots(2,1)
 fig_I.tight_layout()
 sns.histplot(T, kde=True, ax=axes_I[0], edgecolor='black',linewidth=0.75)
 axes_I[0].set_title(f'Weibul Distribution with K={Size_K} and Lambda={Lambda}.')
 sns.histplot(lognormal_costs, kde=True, ax=axes_I[1], color='red', edgecolor='black',linewidth=0.75, bins=45)
-axes_I[1].set_title(f'Log Normal Distribution with mean={10.9} and sigma={0.4}.')
+axes_I[1].set_title(f'Log Normal Distribution with mean={11} and sigma={0.4}.')
 
 #Prob of failure based on threshholds
 min_years = [5,10,15,20,25,30]
