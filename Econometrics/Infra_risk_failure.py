@@ -11,7 +11,7 @@ Size_K = 3
 Sample_Size = 100000
 Budget = 100000
 
-#Weibul Distribution
+#Weibul (failure) and Log-Normal (Costs) distributions
 T = np.random.weibull(a=Size_K,size=Sample_Size)*Lambda
 lognormal_costs = np.random.lognormal(mean=11, sigma=0.8,size=Sample_Size)
 fig_I, axes_I = plt.subplots(2,1)
