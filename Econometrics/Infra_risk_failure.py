@@ -44,10 +44,12 @@ for thr, axA, axB in zip(min_years,axes_II,axes_III):
     axA.axvline(prob,color='red')
     axA.set_ylabel(None)
     axA.set_title(f"Probability of failure with a threshhold of {thr} years")
+    axA.set_ylim(0,Sample_Size)
     sns.histplot(costs > Budget, kde=True, ax=axB, edgecolor='black',linewidth=0.75)
     axB.axvline(prob_over_budget,color='red')
     axB.set_ylabel(None)
     axB.set_title(f"Probability of exceeding budget with a threshhold of {thr} years")
+    axB.set_ylim(0,Sample_Size)
 plt.show()
 
 
