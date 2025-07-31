@@ -123,11 +123,11 @@ axes_II.tick_params(axis='x', rotation=0)
 top_co2, top_gdp, top_ec, top_rec = [clean_data.loc[:,['Country',column, f"{column}_pc"]].groupby('Country').agg({column:'sum',f"{column}_pc":'mean'}) for column in ['CO2','GDP','EC','REC']]
 top_ec.iloc[:,0] = top_ec.iloc[:,0].div(1000000000)
 top_rec.iloc[:,0] = top_rec.iloc[:,0].div(1000000000)
-map_title = {'CO2':'CO2 Emisions',
+map_title = {'CO2':'CO2 Emissions',
              'GDP':'Gros Domestic Product',
              'EC':'Energy Consumption',
              'REC':'Renewable Energy Consumption',
-             'CO2_pc':'CO2 Emisions per capita',
+             'CO2_pc':'CO2 Emissions per capita',
              'GDP_pc':'Gros Domestic Product per capita',
              'EC_pc':'Energy Consumption per capita',
              'REC_pc':'Renewable Energy Consumption per capita'}
